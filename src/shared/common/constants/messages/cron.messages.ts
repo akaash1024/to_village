@@ -1,0 +1,15 @@
+export const CronMessages = {
+  CREATE: 'Cron scheduled successfully',
+  NOT_CREATE_IN_PAST: 'Cannot schedule cron in the past',
+  FAILED_TO_CREATE_CRON: 'Failed to schedule cron',
+  FAILED_TO_UPDATE_CRON: 'Failed to update cron',
+  UPDATE: 'Cron jobs updated successfully',
+  DELETE: 'Cron jobs deleted successfully',
+  FAILED_TO_DELETE: 'Failed to delete cron jobs',
+  GET: 'Cron fetched successfully',
+  NOT_FOUND: 'Failed to fetch cron jobs',
+  NOT_FOUND_OR_NOT_PENDING: 'Cron job not found or not in pending state',
+  ENABLED: 'Enabled Successfully',
+  DISABLED: 'Disabled Successfully',
+  NOTHING_TO_UPDATE: 'Noting found to update',
+} as const;

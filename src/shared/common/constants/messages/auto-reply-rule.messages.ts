@@ -1,0 +1,15 @@
+export const AutoReplyRuleMessages = {
+  ALREADY_EXISTS: 'An auto-reply rule with the same name already exists.',
+  CREATED: 'Auto reply rule created successfully',
+  FETCHED: 'Auto reply rules fetched successfully',
+  FAILED_TO_CREATE: 'Failed to create auto reply rule',
+  FAILED_TO_FETCH: 'Failed to fetch auto reply rules',
+  NOT_FOUND: 'Auto reply rule not found',
+  DELETED: 'Auto reply rule deleted successfully',
+  FAILED_TO_DELETE: 'Failed to delete auto reply rule',
+  DUPLICATE: 'Duplicate Condition — Condition already exists',
+  UPDATED: 'Auto reply rule updated successfully',
+  FAILED_TO_UPDATE: 'Failed to update auto reply rule',
+  STATUS_UPDATED: 'Auto reply rule status updated successfully',
+  STATUS_ALREADY_SET: 'Auto reply rule status is already set to this value',
+};
