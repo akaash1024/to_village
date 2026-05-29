@@ -5,9 +5,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Passenger } from '@assets/cp-entity';
 import { Locations } from '@entities/location';
 import { User } from '@entities/user';
+import { BookingActivityLog } from '../booking-activity-log/booking-activity-log.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Passenger, Locations, User]), ],
+  imports: [TypeOrmModule.forFeature([Passenger, Locations, User]), BookingActivityLog],
   controllers: [BookingController],
   providers: [BookingService],
 })
