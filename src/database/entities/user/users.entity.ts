@@ -17,7 +17,9 @@ export enum UserType {
 
 @Entity({ name: 'user' })
 export class User {
-  @PrimaryColumn({ name: 'user_id' })
+  @PrimaryGeneratedColumn({
+    name: 'user_id',
+  })
   userId: number;
 
   @Column({
