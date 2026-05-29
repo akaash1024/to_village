@@ -57,7 +57,7 @@ export class Locations {
   onboardingDate: Date | null;
 
   @Column({
-    name: 'zipcode',
+    name: 'pincode',
     type: 'varchar',
     length: 20,
     nullable: true,

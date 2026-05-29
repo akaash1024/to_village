@@ -200,35 +200,6 @@ export class AuthGuard implements CanActivate {
         return finalPayload;
       }
 
-      //   If the login User Is Location user Or Not
-
-      if (role === UserType.LOCATION_USER) {
-        const userDetails = await this.userRepo.findOne({
-          where: { userId: Number(sub) },
-        });
-        if (userDetails?.locationIds?.length) {
-          const locations = await this.locationRepo
-            .createQueryBuilder('location')
-            .where('location.locationId IN (:...ids)', {
-              ids: userData?.locationIds,
-            })
-            .orderBy('LOWER(location.locationName)', 'ASC')
-            .getMany();
-
-          if (!locations?.length) {
-            Logger.error('No Loction Fetch For This Location User --->', sub);
-            return;
-          }
-
-          finalPayload = {
-            ...finalPayload,
-            locations,
-            locationId: locations[0]?.locationId ?? '',
-            cuNumber: userData?.cuNumber,
-          };
-        }
-        return finalPayload;
-      }
     } catch (error: any) {
       Logger.error(
         'Error Occured Inside The OpenConnectionForLoginUser --->',
@@ -236,52 +207,5 @@ export class AuthGuard implements CanActivate {
       );
     }
   }
-
-  async callAdminMoudleApi(token: any, userCode, LocationId) {
-    try {
-      let config = {
-        method: 'get',
-        maxBodyLength: Infinity,
-        url: `${process.env.AP_BASE_LOCATION_URL}/api/admin/modules/by-client-user-cp/${userCode}/location/${LocationId}`,
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        data: '',
-      };
-      const getResponse = await axios.request(config);
-      return getResponse?.data?.data;
-    } catch (error) {
-      Logger.error(
-        'Error Occured Inside The callAdminMoudleApi -------->',
-        error,
-      );
-      return true;
-    }
-  }
-
-  async getLocationUserModuleDetails(token: string) {
-    try {
-      // call the Admin Panel API To Fetch Location User Deatils
-
-      let config = {
-        method: 'get',
-        maxBodyLength: Infinity,
-        url: `${process.env.AP_BASE_LOCATION_URL}/api/admin/admin/permissions`,
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        data: '',
-      };
-
-      const getResponse = await axios.request(config);
-
-      return getResponse?.data?.data ?? {};
-    } catch (error) {
-      Logger.error(
-        'Error Occured Inside The getLocationUserModuleDetails -------->',
-        error,
-      );
-      return false;
-    }
-  }
+  
 }

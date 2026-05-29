@@ -80,6 +80,7 @@ export class RegisterUserService {
         lastName: dto.lastName,
         password: hashedPassword,
         userType: dto.userType,
+        userCode: dto.userCode,
         designation: dto.designation,
         isActive: dto.isActive ?? true,
         parentEmail: dto.parentEmail,

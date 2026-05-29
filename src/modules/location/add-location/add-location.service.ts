@@ -38,7 +38,7 @@ export class AddLocationService {
 
     @InjectRepository(User)
     private readonly userRepo: Repository<User>,
-  ) {}
+  ) { }
 
   async addLocation(
     dto: AddLocationReqDto,
@@ -79,6 +79,8 @@ export class AddLocationService {
     /**
      * CHECK DUPLICATE LOCATION
      */
+    const normalizedClientId = dto.clientId.replace(/^cl/i, '');
+
     const existingLocation = await this.locationRepo
       .createQueryBuilder('location')
       .where(
@@ -88,7 +90,7 @@ export class AddLocationService {
         },
       )
       .andWhere('location.clientId = :clientId', {
-        clientId: dto.clientId,
+        clientId: normalizedClientId,
       })
       .andWhere('location.isDeleted = false')
       .getOne();
@@ -114,7 +116,30 @@ export class AddLocationService {
       /**
        * GENERATE IDS
        */
-      const locationId = randomUUID();
+      // const locationId = randomUUID();
+
+      const getLastLocation = await this.locationRepo
+        .createQueryBuilder('location')
+        .select('location')
+        .where('location.clientId = :clientId', {
+          clientId: normalizedClientId,
+        })
+        .orderBy('location.locationId', 'DESC')
+        .getOne();
+
+      let locationId = getLastLocation?.locationId;
+
+      if (!locationId) {
+        locationId = `loc_cl${normalizedClientId}lc001`;
+      } else {
+        const currentNumber = locationId.split('lc')[1];
+
+        const nextNumber = String(
+          Number(currentNumber) + 1,
+        ).padStart(3, '0');
+
+        locationId = `loc_cl${normalizedClientId}lc${nextNumber}`;
+      }
 
       const lcCode = Math.random()
         .toString(36)
@@ -126,7 +151,7 @@ export class AddLocationService {
        */
       const location = queryRunner.manager.create(Locations, {
         locationId,
-        clientId: dto.clientId,
+        clientId: normalizedClientId,
         lcCode,
 
         locationName: dto.locationName,
@@ -214,7 +239,7 @@ export class AddLocationService {
       return errorResponse(
         HttpStatus.INTERNAL_SERVER_ERROR,
         LocationMessages.INTERNAL_ERROR ||
-          'Internal Server Error',
+        'Internal Server Error',
         error instanceof Error
           ? error.message
           : String(error),
