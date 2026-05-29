@@ -4,6 +4,8 @@ import { AuthModule } from './modules/auth/auth.module';
 import { ConnectionModule } from '@assets/connection';
 import { AddLocationModule } from './modules/location/add-location/add-location.module';
 import { PatientModule } from './modules/passanger/passanger.module';
+import { BookingModule } from './modules/bus-booking/booking/booking.module';
+import { BusBookingModule } from './modules/bus-booking/bus-booking.module';
 
 
 
@@ -12,7 +14,8 @@ import { PatientModule } from './modules/passanger/passanger.module';
     ConnectionModule,
     AuthModule,
     AddLocationModule,
-    PatientModule
+    PatientModule,
+    BusBookingModule
   ],
   controllers: [],
   providers: [],
