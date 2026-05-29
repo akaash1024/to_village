@@ -3,9 +3,22 @@ import { Repository } from 'typeorm';
 import { CreateBookingReqDto } from '../dto/create-booking.req.dto';
 import { GenericResponse, errorResponse, sendResponse } from '@common/http/response';
 import { daily } from '@common/decorators';
+import { BookingActivityLogService } from '../booking-activity-log/booking-activity-log.service';
+import { Locations } from '@entities/location';
+import { InjectRepository } from '@nestjs/typeorm';
+import { BookingStatusEnum, PaymentStatusEnum } from '@common/enums/booking.enum';
 
 @Injectable()
 export class BookingService {
+
+    constructor(
+        private readonly bookingActivityLogService: BookingActivityLogService,
+
+        @InjectRepository(Locations)
+        private readonly locationRepo: Repository<Locations>,
+    ) { }
+
+
     @daily()
     private ormEntity({ ...options }): any {
         return options.return(options);
@@ -18,7 +31,7 @@ export class BookingService {
 
     private connectionKey: string;
 
-    async createBooking(userId: string, dto: CreateBookingReqDto, user: any): Promise<GenericResponse<any>> {
+    async createBooking(userId: string, dto: CreateBookingReqDto, user: any) {
         try {
 
             const dynamic = await this.ormEntity({
@@ -48,6 +61,19 @@ export class BookingService {
 
             const booking = bookingRepo.create(payload);
             const saved = await bookingRepo.save(booking);
+
+
+            await this.bookingActivityLogService.createBookingActivityLog(
+                {
+                    bookingId: saved.bookingId,
+                    bookingStatus: BookingStatusEnum.BOOKED,
+                    paymentStatus: PaymentStatusEnum.PENDING,
+                    paymentMode: dto.paymentMode,
+                    locationId: user.locationId,
+                    remarks: 'Booking created',
+                }
+            );
+
 
             return sendResponse('Booking created', { bookingId: saved.bookingId }, HttpStatus.CREATED);
         } catch (error) {

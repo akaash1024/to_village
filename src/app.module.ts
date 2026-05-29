@@ -6,6 +6,7 @@ import { AddLocationModule } from './modules/location/add-location/add-location.
 import { PatientModule } from './modules/passanger/passanger.module';
 import { BookingModule } from './modules/bus-booking/booking/booking.module';
 import { BusBookingModule } from './modules/bus-booking/bus-booking.module';
+import { BookingActivityLog } from './modules/bus-booking/booking-activity-log/booking-activity-log.module';
 
 
 
@@ -15,7 +16,8 @@ import { BusBookingModule } from './modules/bus-booking/bus-booking.module';
     AuthModule,
     AddLocationModule,
     PatientModule,
-    BusBookingModule
+    BusBookingModule,
+    BookingActivityLog
   ],
   controllers: [],
   providers: [],
