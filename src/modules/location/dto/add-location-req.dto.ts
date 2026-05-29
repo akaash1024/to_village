@@ -12,17 +12,17 @@ import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
 
 export class AddLocationReqDto {
-  @ApiProperty({ example: 'CL001' })
+  @ApiProperty({ example: 'cl001' })
   @IsNotEmpty()
   @IsString()
   clientId: string;
 
-  @ApiProperty({ example: 'Indore Main Branch' })
+  @ApiProperty({ example: 'Odhav Main Branch' })
   @IsNotEmpty()
   @IsString()
   locationName: string;
 
-  @ApiProperty({ example: '123 MG Road' })
+  @ApiProperty({ example: 'Near Guru Govind Dham' })
   @IsNotEmpty()
   @IsString()
   addressLine1?: string;
@@ -32,57 +32,57 @@ export class AddLocationReqDto {
   @IsString()
   addressLine2?: string;
 
-  @ApiPropertyOptional({ example: 'indore-branch' })
+  @ApiPropertyOptional({ example: 'odhav-branch' })
   @IsOptional()
   @IsString()
   subDomain?: string;
 
-  @ApiProperty({ example: '2026-02-11' })
+  @ApiProperty({ example: '2026-05-30' })
   @IsDateString()
   onboardingDate?: string;
 
-  @ApiProperty({ example: '452001' })
+  @ApiProperty({ example: '382415' })
   @IsString()
   pincode?: string;
 
-  @ApiProperty({ example: 'Indore' })
+  @ApiProperty({ example: 'Odhav' })
   @IsString()
   city?: string;
 
-  @ApiProperty({ example: 'Madhya Pradesh' })
+  @ApiProperty({ example: 'Uttar Pradesh' })
   @IsOptional()
   @IsString()
   state?: string;
 
-  @ApiProperty({ example: '+919876543210' })
+  @ApiProperty({ example: '+918866113073' })
   @IsString()
   contactNumber?: string;
 
-  @ApiProperty({ example: 'contact@indorebranch.com' })
+  @ApiProperty({ example: 'contact@odhavbranch.com' })
   @IsEmail()
   contactEmail?: string;
 
-  @ApiProperty({ example: 'https://www.indorebranch.com' })
+  @ApiProperty({ example: 'https://www.odhavbranch.com' })
   @IsString()
   websiteUrl?: string;
 
-  @ApiProperty({ example: 'Rahul' })
+  @ApiProperty({ example: 'Govind' })
   @IsString()
   contactPersonFirstName?: string;
 
-  @ApiProperty({ example: 'Sharma' })
+  @ApiProperty({ example: 'Kevat' })
   @IsString()
   contactPersonLastName?: string;
 
-  @ApiProperty({ example: '1990-01-15' })
+  @ApiProperty({ example: '1993-02-07' })
   @IsDateString()
   contactPersonDob?: string;
 
-  @ApiProperty({ example: 'rahul.sharma@gmail.com' })
+  @ApiProperty({ example: 'govind.kevat@gmail.com' })
   @IsEmail()
   contactPersonEmail?: string;
 
-  @ApiProperty({ example: '+919999999999' })
+  @ApiProperty({ example: '+918866113073' })
   @IsString()
   contactPersonPhone?: string;
 }

@@ -25,7 +25,7 @@ export class ConnectionService {
 
   public readonly getOrCreate = async (
     locationId: string,
-  ): Promise<{ key: string; datasource: DataSource }> => {
+  ): Promise<{ key: string; datasource: DataSource }> => {    
     const datasource = new DataSource({
       type: 'postgres',
       host: process.env.DB_HOST,
@@ -47,7 +47,6 @@ export class ConnectionService {
     const connection = { key, datasource };
 
     ConnectionService.connections.set(key, connection);
-
     return connection;
   };
 

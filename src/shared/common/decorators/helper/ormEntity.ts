@@ -3,13 +3,21 @@ import { ConnectionService } from 'src/shared/assets/connection';
 import { Repository } from 'typeorm';
 
 export const ormEntity = async ({ ...options }): Promise<any> => {
+
+  console.log("==>options", options)
   try {
+    console.log('ever reached');
+    
     const dbName: string = options?.args?.database ?? '';
+    console.log(dbName);
     const connectionServices: ConnectionService =
       options?.services?.connectionService;
     const { key, datasource }: any =
       await connectionServices.getOrCreate(dbName);
+      console.log("=>>>>>>>>>>>",key, datasource);
+      
     const manager = datasource.manager;
+
 
     if (options?.args?.entities?.length) {
       const repos = { key };
