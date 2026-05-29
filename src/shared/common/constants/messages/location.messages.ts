@@ -15,6 +15,7 @@ export const LocationMessages = {
   FAILED_TO_FETCH: 'Failed to fetch location',
   ID_REQUIRED: 'Location ID is required',
   MAX_REACHED: 'Maximum number of locations reached (LC999)',
+  INTERNAL_ERROR : 'Internal Error occured'
 } as const;
 
 export const LocationUserMessages = {

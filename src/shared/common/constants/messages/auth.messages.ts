@@ -6,6 +6,7 @@ export const AuthMessages = {
   LOGIN_SUCCESS: 'Login successful',
   LOGIN_FAILED: 'Login failed',
   LOGOUT_SUCCESS: 'Logout successful',
+  LOGOUT_FAILED: 'Logout failed',
   INVALID_CREDENTIALS: 'Invalid username or password',
   TOKEN_EXPIRED: 'Token has expired',
   TOKEN_INVALID: 'Invalid token',
